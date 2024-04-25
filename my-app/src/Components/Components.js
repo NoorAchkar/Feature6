@@ -6,6 +6,7 @@ import ProtectedRoute from "../Common/Services/ProtectedRoute.js";
 import AuthModule from "../Common/Services/Auth/Auth.js"
 import AuthRegister from "../Common/Services/Auth/AuthRegister.js";
 import AuthLogin from "../Common/Services/Auth/AuthLogin.js";
+import AddMeal from "./AddMeal/AddMeal";
 
 // Components function initializes routing between the pages
 export default function Components() {
@@ -18,6 +19,7 @@ export default function Components() {
                 <Route path="/" element={<ProtectedRoute element={Home} />} />
                 <Route path="/mealsearch" element={<ProtectedRoute element={MealSearch} />} />
                 <Route path="/mealtype" element={<ProtectedRoute element={MealType} />} />
+                <Route path="/addmeal" element={<ProtectedRoute element={AddMeal} />} />
             </Routes>
         </Router>
     );

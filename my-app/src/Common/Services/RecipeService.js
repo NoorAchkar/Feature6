@@ -14,3 +14,16 @@ export const getAllMeals = () => {
     return results;
   });
 };
+
+// CREATE operation - new meal with Name
+export const createMeals = (Name) => {
+  console.log("Creating: ", Name);
+  const Lesson = Parse.Object.extend("Recipe");
+  const lesson = new Lesson();
+  // using setter to UPDATE the object
+  lesson.set("recipeName", Name);
+  return lesson.save().then((result) => {
+    // returns new Lesson object
+    return result;
+  });
+};

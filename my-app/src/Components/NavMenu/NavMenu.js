@@ -14,6 +14,9 @@ const NavMenu = () => (
             <li>
                 <Link to="/mealtype">Meal Type</Link>
             </li>
+            <li>
+                <Link to="/addmeal">Add a Meal</Link>
+            </li>
         </ul>
         <br />
         <AuthLogout />
