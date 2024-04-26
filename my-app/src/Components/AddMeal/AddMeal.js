@@ -5,23 +5,27 @@ import { createMeals } from "../../Common/Services/RecipeService.js";
 const AddMeal = () => {
     const [name, setName] = useState("");
     const [type, setType] = useState("");
+    const [ingredients, setIngredients] = useState([]);
+    const [time, setCookTime] = useState("");
 
     // Function to handle submitting the form
     const handleSubmit = (event) => {
         event.preventDefault(); 
-        // Check if both name and type are filled before submitting
-        if (name && type) {
-            // Call createMeal function to add the new meal
-            createMeals(name, type).then((newMeal) => {
+        // Check if all required fields are filled before submitting
+        if (name && type && ingredients.length > 0 && time) {
+            // Call createMeals function to add the new meal
+            createMeals(name, type, ingredients, time).then((newMeal) => {
                 // Optionally, you can reset the form fields after successful submission
                 setName("");
                 setType("");
+                setIngredients([]);
+                setCookTime("");
                 console.log("New meal added:", newMeal);
             }).catch(error => {
                 console.error("Error adding meal:", error);
             });
         } else {
-            alert("Please fill out both the recipe name and meal type before submitting.");
+            alert("Please fill out all the fields before submitting.");
         }
     };
 
@@ -33,6 +37,23 @@ const AddMeal = () => {
     // Function to handle input change for meal type
     const handleMealTypeChange = (event) => {
         setType(event.target.value); 
+    };
+
+    // Function to handle input change for ingredients
+    const handleIngredientChange = (index, event) => {
+        const newIngredients = [...ingredients];
+        newIngredients[index] = event.target.value;
+        setIngredients(newIngredients); 
+    };
+
+    // Function to handle adding a new input field for ingredients
+    const handleAddIngredientField = () => {
+        setIngredients([...ingredients, ""]);
+    };
+
+    // Function to handle input change for cook time
+    const handleCookTimeChange = (event) => {
+        setCookTime(event.target.value); 
     };
 
     return (
@@ -59,6 +80,31 @@ const AddMeal = () => {
                     name="type"
                     value={type}
                     onChange={handleMealTypeChange}
+                />
+                <br />
+                {/* Input fields for ingredients */}
+                {ingredients.map((ingredient, index) => (
+                    <div key={index}>
+                        <label htmlFor={`ingredient${index + 1}`}>Ingredient {index + 1}:</label>
+                        <input
+                            type="text"
+                            id={`ingredient${index + 1}`}
+                            name={`ingredient${index + 1}`}
+                            value={ingredient}
+                            onChange={(event) => handleIngredientChange(index, event)}
+                        />
+                    </div>
+                ))}
+                <button type="button" onClick={handleAddIngredientField}>Add Ingredient</button>
+                <br />
+                {/* Input field for cook time */}
+                <label htmlFor="cookTime">Cook Time:</label>
+                <input
+                    type="text"
+                    id="cookTime"
+                    name="time"
+                    value={time}
+                    onChange={handleCookTimeChange}
                 />
                 <br />
                 {/* Button to submit the form */}
