@@ -16,12 +16,15 @@ export const getAllMeals = () => {
 };
 
 // CREATE operation - new meal with Name
-export const createMeals = (Name) => {
+export const createMeals = (Name, Type, Ingredients, Time) => {
   console.log("Creating: ", Name);
   const Lesson = Parse.Object.extend("Recipe");
   const lesson = new Lesson();
   // using setter to UPDATE the object
   lesson.set("recipeName", Name);
+  lesson.set("mealType", Type);
+  lesson.set("ingredients", Ingredients);
+  lesson.set("cookTime", Time);
   return lesson.save().then((result) => {
     // returns new Lesson object
     return result;

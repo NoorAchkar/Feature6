@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavMenu from "../NavMenu/NavMenu";
 import { createMeals } from "../../Common/Services/RecipeService.js"; 
 
 const AddMeal = () => {
     const [name, setName] = useState("");
-    const [meals, setMeals] = useState([]);
-    const [add, setAdd] = useState(false);
-
-    // useEffect with dependency array to trigger only when 'add' flag changes
-    useEffect(() => {
-        // Check for add flag and make sure name state variable is defined
-        if (name && add) {
-            // Call createMeals function to add the new meal
-            createMeals(name).then((newMeal) => {
-                setAdd(false); 
-                setName(""); 
-                // Add the newly created meal to the meals array
-                setMeals([...meals, newMeal]);
-            }).catch(error => {
-                console.error("Error adding meal:", error);
-            });
-        }
-    }, [add]); 
+    const [type, setType] = useState("");
 
     // Function to handle submitting the form
     const handleSubmit = (event) => {
         event.preventDefault(); 
-        setAdd(true); 
+        // Check if both name and type are filled before submitting
+        if (name && type) {
+            // Call createMeal function to add the new meal
+            createMeals(name, type).then((newMeal) => {
+                // Optionally, you can reset the form fields after successful submission
+                setName("");
+                setType("");
+                console.log("New meal added:", newMeal);
+            }).catch(error => {
+                console.error("Error adding meal:", error);
+            });
+        } else {
+            alert("Please fill out both the recipe name and meal type before submitting.");
+        }
     };
 
-    // Function to handle input change
-    const handleInputChange = (event) => {
+    // Function to handle input change for recipe name
+    const handleNameChange = (event) => {
         setName(event.target.value); 
+    };
+
+    // Function to handle input change for meal type
+    const handleMealTypeChange = (event) => {
+        setType(event.target.value); 
     };
 
     return (
@@ -47,8 +48,19 @@ const AddMeal = () => {
                     id="recipeName"
                     name="name"
                     value={name}
-                    onChange={handleInputChange}
+                    onChange={handleNameChange}
                 />
+                <br />
+                {/* Input field for meal type */}
+                <label htmlFor="mealType">Meal Type (Breakfast, Lunch, Dinner):</label>
+                <input
+                    type="text"
+                    id="mealType"
+                    name="type"
+                    value={type}
+                    onChange={handleMealTypeChange}
+                />
+                <br />
                 {/* Button to submit the form */}
                 <button type="submit">Add Meal</button>
             </form>
