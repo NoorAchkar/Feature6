@@ -8,7 +8,7 @@
   // Imports getAllMeals function that fetchs a list of Meals from a JSON file
   import { getAllMeals } from "../../Common/Services/RecipeService.js"; 
 
-  import { getAllCommentsperMeals } from "../../Common/Services/CommentsService.js"
+  import { getAllCommentsperMeals, createComments } from "../../Common/Services/CommentsService.js"
   
   const MealSearch = () => {
     // Hooks to manage the componenet's state based on what item was searched
@@ -16,6 +16,8 @@
     const [comments, setComments] = useState([])
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [commentTitle, setCommentTitle] = useState("");
+    const [commentBody, setCommentBody] = useState("");
   
     // Fetches meal data
     useEffect(() => {
@@ -37,6 +39,20 @@
   
     const handleInputChange = (event) => {
       setSearchInput(event.target.value);
+    };
+
+    const handleCommentSubmit = (user) => {
+      if (commentTitle && commentBody) {
+        createComments(user, commentTitle, commentBody)
+            .then((newComment) => {
+                setCommentTitle("");
+                setCommentBody("");
+                setComments([...comments, newComment]);
+            })
+            .catch((error) => {
+                console.error("Error adding comment:", error);
+            });
+      } 
     };
 
     // Routing and Button Handler for Return Home Button
@@ -61,7 +77,15 @@
         <SearchChild onSearch={handleSearch} />
         
         <div>
-          <SearchResults users={searchResults} comments={comments}/>
+        <SearchResults
+          users={searchResults}
+          comments={comments}
+          onCommentSubmit={handleCommentSubmit}
+          commentTitle={commentTitle}
+          setCommentTitle={setCommentTitle}
+          commentBody={commentBody}
+          setCommentBody={setCommentBody}
+        />
         </div>
         <button onClick={buttonHandler}>Return Home</button>
       </div>
@@ -69,7 +93,7 @@
   };
   
   // Searches for the correct result
-  const SearchResults = ({ users, comments }) => {
+  const SearchResults = ({ users, comments, onCommentSubmit, commentTitle, setCommentTitle, commentBody, setCommentBody }) => {
     return (
       <div>
         <ul>
@@ -90,8 +114,21 @@
                 ))}
             </ul>
             <h3>Add a Comment:</h3>
-
-            </li>
+            <input
+                type="text"
+                placeholder="Title"
+                value={commentTitle}
+                onChange={(e) => setCommentTitle(e.target.value)}
+            />
+            <br />
+            <textarea
+                placeholder="Body"
+                value={commentBody}
+                onChange={(e) => setCommentBody(e.target.value)}
+            ></textarea>
+            <br />
+            <button onClick={() => onCommentSubmit(user)}>Submit Comment</button>
+        </li>
           ))}
         </ul>
         

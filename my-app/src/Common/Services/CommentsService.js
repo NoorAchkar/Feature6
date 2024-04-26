@@ -25,3 +25,14 @@ export const getAllCommentsperMeals = (recipe) => {
   });
 };
 
+export const createComments = (recipe, Title, Body) => {
+  const Comment = Parse.Object.extend("Comments");
+  const newComment = new Comment();
+  newComment.set("title", Title);
+  newComment.set("body", Body);
+  // Set a pointer to the recipe the comment belongs to
+  newComment.set("recipe", recipe);
+  return newComment.save().then((result) => {
+      return result;
+  });
+};
