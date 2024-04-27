@@ -51,6 +51,13 @@ const AddMeal = () => {
         setIngredients([...ingredients, ""]);
     };
 
+    // Function to handle removing an ingredient
+    const handleRemoveIngredient = (index) => {
+        const newIngredients = [...ingredients];
+        newIngredients.splice(index, 1);
+        setIngredients(newIngredients);
+    };
+
     // Function to handle input change for cook time
     const handleCookTimeChange = (event) => {
         setCookTime(event.target.value); 
@@ -96,6 +103,7 @@ const AddMeal = () => {
                             onChange={(event) => handleIngredientChange(index, event)}
                             className="space rounded"
                         />
+                        <button type="button" className="rounded" onClick={() => handleRemoveIngredient(index)}>Remove</button> {/* Button to remove ingredient */}
                     </div>
                 ))}
                 <button type="button" className="rounded" onClick={handleAddIngredientField}>Add Ingredient</button>
