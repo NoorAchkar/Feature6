@@ -45,6 +45,7 @@ const MealType = () => {
             name="mealType"
             value="breakfast"
             onChange={handleMealTypeChange}
+            className="space"
           />
           Breakfast
         </label>
@@ -54,6 +55,7 @@ const MealType = () => {
             name="mealType"
             value="lunch"
             onChange={handleMealTypeChange}
+            className="space" 
           />
           Lunch
         </label>
@@ -63,6 +65,7 @@ const MealType = () => {
             name="mealType"
             value="dinner"
             onChange={handleMealTypeChange}
+            className="space"
           />
           Dinner
         </label>

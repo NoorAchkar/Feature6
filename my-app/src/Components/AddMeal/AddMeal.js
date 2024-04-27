@@ -63,23 +63,25 @@ const AddMeal = () => {
             <h1>Add a Meal</h1>
             <form onSubmit={handleSubmit}>
                 {/* Input field for recipe name */}
-                <label htmlFor="recipeName">Recipe Name:</label>
+                <label htmlFor="recipeName" >Recipe Name:</label>
                 <input
                     type="text"
                     id="recipeName"
                     name="name"
                     value={name}
                     onChange={handleNameChange}
+                    className="space rounded"
                 />
                 <br />
                 {/* Input field for meal type */}
-                <label htmlFor="mealType">Meal Type (Breakfast, Lunch, Dinner):</label>
+                <label htmlFor="mealType" >Meal Type (Breakfast, Lunch, Dinner):</label>
                 <input
                     type="text"
                     id="mealType"
                     name="type"
                     value={type}
                     onChange={handleMealTypeChange}
+                    className="space rounded"
                 />
                 <br />
                 {/* Input fields for ingredients */}
@@ -92,10 +94,11 @@ const AddMeal = () => {
                             name={`ingredient${index + 1}`}
                             value={ingredient}
                             onChange={(event) => handleIngredientChange(index, event)}
+                            className="space rounded"
                         />
                     </div>
                 ))}
-                <button type="button" onClick={handleAddIngredientField}>Add Ingredient</button>
+                <button type="button" className="rounded" onClick={handleAddIngredientField}>Add Ingredient</button>
                 <br />
                 {/* Input field for cook time */}
                 <label htmlFor="cookTime">Cook Time:</label>
@@ -105,10 +108,11 @@ const AddMeal = () => {
                     name="time"
                     value={time}
                     onChange={handleCookTimeChange}
+                    className="space rounded"
                 />
                 <br />
                 {/* Button to submit the form */}
-                <button type="submit">Add Meal</button>
+                <button type="submit" className="rounded comment-button">Add Meal</button>
             </form>
         </div>
     );

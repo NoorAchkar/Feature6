@@ -9,7 +9,7 @@ const TypeChild = ({ users, selectedMealType }) => {
             .filter((user) => user.get("mealType")?.toLowerCase() === selectedMealType)
             .map((user) => (
               <li key={user.id}>
-                <p><b>{user.get("recipeName")}</b></p>
+                <p>{user.get("recipeName")}</p>
               </li>
             ))}
         </ul>
