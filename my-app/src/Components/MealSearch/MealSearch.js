@@ -73,6 +73,7 @@
             name="name"
             value={searchInput}
             onChange={handleInputChange}
+            className="rounded"
           />
         <SearchChild onSearch={handleSearch} />
         
@@ -91,28 +92,32 @@
       </div>
     );
   };
-  
+
   // Searches for the correct result
   const SearchResults = ({ users, comments, onCommentSubmit, commentTitle, setCommentTitle, commentBody, setCommentBody }) => {
     return (
       <div>
+        
         <ul>
           {users.map((user) => (
-            <li key={user.id}>
-              <p><b>{user.get("recipeName")}</b></p>
+            <div key={user.id}>
+              <div className="card">
+              <h3><b>{user.get("recipeName")}</b></h3>
               <p>Meal Type: {user.get("mealType")}</p>
-              <p>Ingredients: {user.get("ingredients")}</p>
+              <p>Ingredients: {user.get("ingredients").join(', ')}</p>
               <p>Cook Time: {user.get("cookTime")}</p>
+              </div>
               <h3>Comments:</h3>
               <ul>
               {comments
               .filter((comment) => comment.get("recipe").id === user.id)
                 .map((comment) => (
-                  <li key={comment.id}>
-                     <h4>{comment.get("title")}</h4>
-                     <p>{comment.get("body")}</p></li>
+                  <div key={comment.id} className="comments">
+                     <h4><b>{comment.get("title")}</b></h4>
+                     <p>{comment.get("body")}</p></div>
                 ))}
             </ul>
+            <div>
             <h3>Add a Comment:</h3>
             <input
                 type="text"
@@ -127,8 +132,9 @@
                 onChange={(e) => setCommentBody(e.target.value)}
             ></textarea>
             <br />
-            <button onClick={() => onCommentSubmit(user)}>Submit Comment</button>
-        </li>
+            <button onClick={() => onCommentSubmit(user)} className="comment-button">Submit Comment</button>
+            </div>
+        </div>
           ))}
         </ul>
         

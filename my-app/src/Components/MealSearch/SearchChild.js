@@ -11,7 +11,7 @@ const SearchChild = ({ onSearch }) => {
 };
 
 const ButtonComponent = ({ onClick }) => {
-  return <button onClick={onClick}>Search</button>;
+  return <button onClick={onClick} className="rounded">Search</button>;
 };
 
 export default SearchChild;

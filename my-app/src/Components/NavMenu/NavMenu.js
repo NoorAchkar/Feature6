@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom";
 import AuthLogout from "../../Common/Services/Auth/AuthLogout";
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 
 // Room for Change/Improvement: Using Flexbox/Bootstrap for a better NavBar
 const NavMenu = () => (
