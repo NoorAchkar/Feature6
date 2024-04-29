@@ -16,6 +16,9 @@ const NavMenu = () => (
   <Nav.Item>
     <Nav.Link href="/addmeal">Add a Meal</Nav.Link>
   </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="/mealplanner">Meal Planner</Nav.Link>
+  </Nav.Item>
   <AuthLogout />
 </Nav>
 );
