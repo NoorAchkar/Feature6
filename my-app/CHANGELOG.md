@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.4.0] - 2024-05-01
+
+### Added
+* Created an Add Meal feature where the user can input recipe name, type, ingredients, and time
+* Created an Add a Comment section where the user can add a comment title and body for a specific meal
+* Deployed the application
+* Created a Meal Planner where users can add different meals for multiple days. They can also edit, delete, and view their meal plan.
+* Created a Favorites list where the user can favorite items 
+
+### Changed
+
+### Fixed
+* The CSS and design of the application
+
 ## [0.3.0] - 2024-04-03
 
 ### Added
