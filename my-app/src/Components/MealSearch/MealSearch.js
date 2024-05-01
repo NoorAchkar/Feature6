@@ -67,7 +67,9 @@
       <div>
         <NavMenu />
         <hr />
+        <div className="intro">
         <h1>Meal Search</h1>
+        </div>
         <input
             type="text"
             name="name"
@@ -88,7 +90,7 @@
           setCommentBody={setCommentBody}
         />
         </div>
-        <button onClick={buttonHandler}>Return Home</button>
+        <button onClick={buttonHandler} className="returnhome">Return Home</button>
       </div>
     );
   };
@@ -107,6 +109,7 @@
               <p>Ingredients: {user.get("ingredients").join(', ')}</p>
               <p>Cook Time: {user.get("cookTime")}</p>
               </div>
+              <div className="intro">
               <h3>Comments:</h3>
               <ul>
               {comments
@@ -117,19 +120,20 @@
                      <p>{comment.get("body")}</p></div>
                 ))}
             </ul>
-            <div>
             <h3>Add a Comment:</h3>
             <input
                 type="text"
                 placeholder="Title"
                 value={commentTitle}
                 onChange={(e) => setCommentTitle(e.target.value)}
+                className="rounded"
             />
             <br />
             <textarea
                 placeholder="Body"
                 value={commentBody}
                 onChange={(e) => setCommentBody(e.target.value)}
+                className="rounded"
             ></textarea>
             <br />
             <button onClick={() => onCommentSubmit(user)} className="comment-button">Submit Comment</button>

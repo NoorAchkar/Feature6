@@ -47,16 +47,18 @@ const MealPlanner = () => {
       <div>
         <NavMenu />
         <hr />
+        <div className="intro">
         <h1>Meal Planner</h1>
         <label>
           Number of Days:
-          <input type="number" value={days} onChange={handleDaysChange} onBlur={handleDaysBlur} />
+          <input type="number" value={days} onChange={handleDaysChange} onBlur={handleDaysBlur} className="space rounded" />
         </label>
         {Array.from({ length: days }, (_, index) => (
           <MealSelector key={index} day={index + 1} onMealSelectionChange={handleMealSelectionChange} />
         ))}
         <br/>
-        <button onClick={handleSavePlan}>Save Meal Plan</button>
+        <button onClick={handleSavePlan} className="rounded comment-button">Save Meal Plan</button>
+        </div>
       </div>
     );
 };

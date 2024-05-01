@@ -37,8 +37,10 @@ const MealType = () => {
     <div>
       <NavMenu />
       <hr />
+      <div className="intro">
       <h1>Meal type selection</h1>
-      <div>
+      </div>
+      <div className="intro">
         <label>
           <input
             type="radio"
@@ -76,7 +78,7 @@ const MealType = () => {
       </div>
       {/* Pass selectedMealType and users to Child component */}
       <TypeChild users={users} selectedMealType={selectedMealType} />
-      <button onClick={buttonHandler}>Return Home</button>
+      <button onClick={buttonHandler} className="returnhome">Return Home</button>
     </div>
   );
 };

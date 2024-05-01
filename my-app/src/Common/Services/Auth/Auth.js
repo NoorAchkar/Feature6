@@ -19,17 +19,19 @@ const AuthModule = () => {
     <div>
       <br />
       <br />
+      <div className="intro">
       <h1>Welcome to Food Aid!</h1>
-      Log in or Register to Start Using!
+      <p>Log in or Register to Start Using the App!</p>
+      </div>
       <br />
-      <Link to="/auth/login">
-        <button>Login</button>
-      </Link>
-      <br />
-      <br />
-      <Link to="/auth/register">
-        <button>Register</button>
-      </Link>
+      <div class="login-container">
+        <Link to="/auth/login" class="login">
+          <button>Login</button>
+        </Link>
+        <Link to="/auth/register" class="register">
+          <button>Register</button>
+        </Link>
+      </div>
     </div>
   );
 };

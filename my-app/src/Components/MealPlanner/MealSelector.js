@@ -34,7 +34,7 @@ const MealSelector = ({ day, onMealSelectionChange }) => {
   };
 
   return (
-    <div>
+    <div className="addmeals">
       <h3>Day {day}</h3>
       {['breakfast', 'lunch', 'dinner'].map(mealType => (
         <div key={mealType}>
@@ -43,6 +43,7 @@ const MealSelector = ({ day, onMealSelectionChange }) => {
             <select 
               value={selectedMeals[mealType]} 
               onChange={e => handleMealChange(mealType, e)}
+              className="rounded"
             >
               <option value="">Select {mealType}</option>
               {meals.filter(meal => meal.get("mealType")?.toLowerCase() === mealType).map(meal => (

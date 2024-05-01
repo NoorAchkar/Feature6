@@ -67,8 +67,10 @@ const AddMeal = () => {
         <div>
             <NavMenu />
             <hr />
+            <div className="intro">
             <h1>Add a Meal</h1>
             <form onSubmit={handleSubmit}>
+                <div className="addmeals">
                 {/* Input field for recipe name */}
                 <label htmlFor="recipeName" >Recipe Name:</label>
                 <input
@@ -77,7 +79,7 @@ const AddMeal = () => {
                     name="name"
                     value={name}
                     onChange={handleNameChange}
-                    className="space rounded"
+                    className="rounded"
                 />
                 <br />
                 {/* Input field for meal type */}
@@ -88,7 +90,7 @@ const AddMeal = () => {
                     name="type"
                     value={type}
                     onChange={handleMealTypeChange}
-                    className="space rounded"
+                    className="rounded"
                 />
                 <br />
                 {/* Input fields for ingredients */}
@@ -101,7 +103,7 @@ const AddMeal = () => {
                             name={`ingredient${index + 1}`}
                             value={ingredient}
                             onChange={(event) => handleIngredientChange(index, event)}
-                            className="space rounded"
+                            className="rounded"
                         />
                         <button type="button" className="rounded" onClick={() => handleRemoveIngredient(index)}>Remove</button> {/* Button to remove ingredient */}
                     </div>
@@ -116,12 +118,15 @@ const AddMeal = () => {
                     name="time"
                     value={time}
                     onChange={handleCookTimeChange}
-                    className="space rounded"
+                    className="rounded"
                 />
                 <br />
-                {/* Button to submit the form */}
-                <button type="submit" className="rounded comment-button">Add Meal</button>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                    <button type="submit" className="rounded comment-button">Add Meal</button>
+                </div>
             </form>
+            </div>
         </div>
     );
 };

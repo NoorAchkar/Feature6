@@ -3,16 +3,14 @@ import React from "react";
 // Component takes props: selectedMealType and handleMealChange and prints out the specified recipeName corresponding
 const TypeChild = ({ users, selectedMealType }) => {
   return (
-    <div>
-      <ul>
+    <div className="intro">
           {users
             .filter((user) => user.get("mealType")?.toLowerCase() === selectedMealType)
             .map((user) => (
-              <li key={user.id}>
+              <div key={user.id}>
                 <p>{user.get("recipeName")}</p>
-              </li>
+              </div>
             ))}
-        </ul>
     </div>
   );
 };
