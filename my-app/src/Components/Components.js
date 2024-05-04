@@ -6,8 +6,12 @@ import ProtectedRoute from "../Common/Services/ProtectedRoute.js";
 import AuthModule from "../Common/Services/Auth/Auth.js"
 import AuthRegister from "../Common/Services/Auth/AuthRegister.js";
 import AuthLogin from "../Common/Services/Auth/AuthLogin.js";
-import AddMeal from "./AddMeal/AddMeal";
+import AddMeal from "./AddMeal/AddMeal.js";
 import MealPlanner from "./MealPlanner/MealPlanner.js";
+import PlanManager from "./PlanManager/PlanManager.js";
+import PlanEdit from "./PlanEdit/PlanEdit.js"; 
+import FavoriteList from "./FavoriteList/FavoriteList.js";
+
 
 // Components function initializes routing between the pages
 export default function Components() {
@@ -22,6 +26,9 @@ export default function Components() {
                 <Route path="/mealtype" element={<ProtectedRoute element={MealType} />} />
                 <Route path="/addmeal" element={<ProtectedRoute element={AddMeal} />} />
                 <Route path="/mealplanner" element={<ProtectedRoute element={MealPlanner} />} />
+                <Route path="/planmanager" element={<ProtectedRoute element={PlanManager} />} />
+                <Route path="/planedit/:id" element={<ProtectedRoute element={PlanEdit} />} />
+                <Route path="favorites" element={<ProtectedRoute element={FavoriteList} />} />
             </Routes>
         </Router>
     );

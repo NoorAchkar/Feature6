@@ -30,3 +30,20 @@ export const createMeals = (Name, Type, Ingredients, Time) => {
     return result;
   });
 };
+
+export const toggleFavorite = async (recipeId) => {
+  const Recipe = Parse.Object.extend("Recipe");
+  const query = new Parse.Query(Recipe);
+
+  try {
+    const recipe = await query.get(recipeId);  // Ensure this ID is correct and exists
+    const currentFavoriteStatus = recipe.get('isFavorite');
+    recipe.set('isFavorite', !currentFavoriteStatus);
+    await recipe.save();
+    return recipe;
+  } catch (error) {
+    console.error("Error toggling favorite status:", error);
+    throw error;
+  }
+}
+

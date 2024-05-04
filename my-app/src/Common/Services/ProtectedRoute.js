@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { checkUser } from "./Auth/AuthService";
 
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const navigate = useNavigate();
+  const params = useParams();
   const isAuthorized = checkUser();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const ProtectedRoute = ({ element: Component, ...rest }) => {
 
   return (
     <>
-      {isAuthorized && <Component {...rest} />}
+      {isAuthorized && <Component {...rest} {... params} />}
     </>
   );
 };

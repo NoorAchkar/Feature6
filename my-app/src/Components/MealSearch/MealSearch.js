@@ -6,7 +6,7 @@
   import SearchChild from "./SearchChild.js";
   
   // Imports getAllMeals function that fetchs a list of Meals from a JSON file
-  import { getAllMeals } from "../../Common/Services/RecipeService.js"; 
+  import { getAllMeals, toggleFavorite } from "../../Common/Services/RecipeService.js"; 
 
   import { getAllCommentsperMeals, createComments } from "../../Common/Services/CommentsService.js"
   
@@ -28,19 +28,19 @@
         setComments(comments);
       });
     }, []);
-  
-    // Event handler that sets the meal that is searched in the input
+
     const handleSearch = () => {
       const filteredUsers = users.filter((user) =>
         user.get("recipeName").toLowerCase().includes(searchInput.toLowerCase())
       );
-      setSearchResults(filteredUsers);
+      setSearchResults(filteredUsers); // Make sure filteredUsers are still Parse objects
     };
+    
   
     const handleInputChange = (event) => {
       setSearchInput(event.target.value);
     };
-
+    
     const handleCommentSubmit = (user) => {
       if (commentTitle && commentBody) {
         createComments(user, commentTitle, commentBody)
@@ -88,6 +88,9 @@
           setCommentTitle={setCommentTitle}
           commentBody={commentBody}
           setCommentBody={setCommentBody}
+          toggleFavorite={toggleFavorite}
+          setSearchResults={setSearchResults}
+
         />
         </div>
         <button onClick={buttonHandler} className="returnhome">Return Home</button>
@@ -96,7 +99,35 @@
   };
 
   // Searches for the correct result
-  const SearchResults = ({ users, comments, onCommentSubmit, commentTitle, setCommentTitle, commentBody, setCommentBody }) => {
+  const SearchResults = ({ users, comments, onCommentSubmit, commentTitle, setCommentTitle, commentBody, setCommentBody, toggleFavorite, setSearchResults }) => {
+    const handleToggleFavorite = async (user) => {
+      try {
+        // Ensure user is a valid object with an id property
+        if (!user || typeof user.get !== 'function') {
+          console.error("Invalid or corrupted user object:", user);
+          return;
+        }
+        
+        const newFavoriteStatus = !user.get('isFavorite');
+        await toggleFavorite(user.id);
+    
+        // Update searchResults to reflect the new favorite status
+        setSearchResults(prevResults => prevResults.map(item => {
+          if (item.id === user.id) {
+            // Returning a new object with updated favorite status
+            let updatedItem = Object.assign(Object.create(Object.getPrototypeOf(user)), user);
+            updatedItem.set('isFavorite', newFavoriteStatus);
+            return updatedItem;
+          }
+          return item;
+        }));
+        
+        alert(`Recipe "${user.get("recipeName")}" has been ${newFavoriteStatus ? 'added to' : 'removed from'} favorites.`);
+      } catch (error) {
+        console.error("Error toggling favorite status:", error);
+      }
+    };
+    
     return (
       <div>
         
@@ -108,6 +139,9 @@
               <p>Meal Type: {user.get("mealType")}</p>
               <p>Ingredients: {user.get("ingredients").join(', ')}</p>
               <p>Cook Time: {user.get("cookTime")}</p>
+              <button onClick={() => handleToggleFavorite(user)}>
+                {user.get('isFavorite') ? 'Remove from Favorites' : 'Add to Favorites'}
+              </button>
               </div>
               <div className="intro">
               <h3>Comments:</h3>

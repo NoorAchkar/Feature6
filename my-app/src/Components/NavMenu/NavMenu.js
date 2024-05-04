@@ -19,6 +19,12 @@ const NavMenu = () => (
   <Nav.Item>
     <Nav.Link href="/mealplanner">Meal Planner</Nav.Link>
   </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="/planmanager">Meal Plan Manager</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="/favorites">Favorites List</Nav.Link>
+  </Nav.Item>
   <AuthLogout />
 </Nav>
 );
