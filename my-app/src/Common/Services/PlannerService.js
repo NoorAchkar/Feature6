@@ -34,7 +34,6 @@ export const saveMealPlan = async (mealPlanData) => {
 };
 
 // Function to fetch all meal plans for a specific user
-
 export const fetchMealPlans = async (userId) => {
     const MealPlan = Parse.Object.extend('MealPlan');
     const user = Parse.User.createWithoutData(userId);

@@ -31,6 +31,7 @@ export const createMeals = (Name, Type, Ingredients, Time) => {
   });
 };
 
+// Operation to toggle whether or not a recipe is favorited
 export const toggleFavorite = async (recipeId) => {
   const Recipe = Parse.Object.extend("Recipe");
   const query = new Parse.Query(Recipe);

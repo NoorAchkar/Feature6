@@ -9,7 +9,6 @@ import AuthLogin from "../Common/Services/Auth/AuthLogin.js";
 import AddMeal from "./AddMeal/AddMeal.js";
 import MealPlanner from "./MealPlanner/MealPlanner.js";
 import PlanManager from "./PlanManager/PlanManager.js";
-import PlanEdit from "./PlanEdit/PlanEdit.js"; 
 import FavoriteList from "./FavoriteList/FavoriteList.js";
 
 
@@ -27,7 +26,6 @@ export default function Components() {
                 <Route path="/addmeal" element={<ProtectedRoute element={AddMeal} />} />
                 <Route path="/mealplanner" element={<ProtectedRoute element={MealPlanner} />} />
                 <Route path="/planmanager" element={<ProtectedRoute element={PlanManager} />} />
-                <Route path="/planedit/:id" element={<ProtectedRoute element={PlanEdit} />} />
                 <Route path="favorites" element={<ProtectedRoute element={FavoriteList} />} />
             </Routes>
         </Router>

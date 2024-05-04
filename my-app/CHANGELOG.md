@@ -6,7 +6,7 @@
 * Created an Add Meal feature where the user can input recipe name, type, ingredients, and time
 * Created an Add a Comment section where the user can add a comment title and body for a specific meal
 * Deployed the website on Vercel: https://feature6.vercel.app/auth/
-* Created a Meal Planner where users can add different meals for multiple days. They can also edit, delete, and view their meal plan.
+* Created a Meal Planner where users can add different meals for multiple days. They can also view and delete their meal plan.
 * Created a Favorites list where the user can favorite items 
 
 ### Changed

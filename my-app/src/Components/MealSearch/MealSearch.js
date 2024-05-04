@@ -33,7 +33,7 @@
       const filteredUsers = users.filter((user) =>
         user.get("recipeName").toLowerCase().includes(searchInput.toLowerCase())
       );
-      setSearchResults(filteredUsers); // Make sure filteredUsers are still Parse objects
+      setSearchResults(filteredUsers);
     };
     
   
@@ -100,6 +100,7 @@
 
   // Searches for the correct result
   const SearchResults = ({ users, comments, onCommentSubmit, commentTitle, setCommentTitle, commentBody, setCommentBody, toggleFavorite, setSearchResults }) => {
+    // Deals witth the favorite status of a meal via toggle
     const handleToggleFavorite = async (user) => {
       try {
         // Ensure user is a valid object with an id property

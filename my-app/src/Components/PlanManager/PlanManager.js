@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import NavMenu from "../NavMenu/NavMenu";
 import { fetchMealPlans, deleteMealPlan } from '../../Common/Services/PlannerService';
 import Parse from 'parse';
 
 const MealPlanManager = () => {
-    const [mealPlans, setMealPlans] = useState([]);
-    const navigate = useNavigate();
+    const [mealPlans, setMealPlans] = useState([]); // Stores meal plans fetched from server
     const currentUser = Parse.User.current();
 
+    // Fetches meal plans for current user
     useEffect(() => {
         if (currentUser) {
             fetchMealPlans(currentUser.id)
@@ -17,6 +16,7 @@ const MealPlanManager = () => {
         }
     }, [currentUser]);
 
+    // Handles meal plan deletion
     const handleDelete = (planId) => {
         deleteMealPlan(planId)
             .then(() => {
@@ -27,10 +27,6 @@ const MealPlanManager = () => {
                 console.error('Error deleting meal plan:', error);
                 alert('Failed to delete meal plan');
             });
-    };
-
-    const handleEdit = (planId) => {
-        navigate(`/planedit/${planId}`);
     };
 
       // Function to render meals of a plan
@@ -54,7 +50,6 @@ const MealPlanManager = () => {
                     <div key={plan.id}>
                         <h2>Plan for {plan.days} days</h2>
                         {renderMeals(plan.meals)}
-                        <button onClick={() => handleEdit(plan.id)}>Edit</button>
                         <button onClick={() => handleDelete(plan.id)}>Delete</button>
                     </div>
                 ))
