@@ -3,10 +3,10 @@ import NavMenu from "../NavMenu/NavMenu";
 import { getAllMeals, toggleFavorite } from "../../Common/Services/RecipeService";
 
 const FavoriteList = () => {
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]); // Holds favorite recipes
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchFavorites = async () => { // Fetches and filters favorite meals
       const allMeals = await getAllMeals();
       const favorites = allMeals.filter(meal => meal.get('isFavorite') === true);
       setFavoriteRecipes(favorites);
@@ -15,6 +15,7 @@ const FavoriteList = () => {
     fetchFavorites();
   }, []);
 
+  // Handlers favorite status of recipe via toggle
   const handleToggleFavorite = async (recipe) => {
     await toggleFavorite(recipe.id);
     setFavoriteRecipes(prev => prev.filter(r => r.id !== recipe.id));  // Optimistically remove from UI
